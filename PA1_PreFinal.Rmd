@@ -1,0 +1,37 @@
+Reproducible Research: Peer Assessment 1
+========================================
+```{r dataTime,echo=FALSE}
+time <- format(Sys.time(), "%a %dth of %b in %Y")
+```
+
+ by Juan M. Medel on `r time`
+-----------------------------
+ 
+## 1. Loading and preprocessing the data
+I'll load the data and remove the element which has no valid data in the steps column
+```{r LoadingData}
+rawData <- read.csv(file="activity.csv") 
+PreProcesedData <- rawData[!is.na(rawData$steps),]
+head(PreProcesedData)
+```
+## 2. What is mean total number of steps taken per day?
+```{r barplot, fig.width=20}
+stepsPerDay <- tapply(X = PreProcesedData$steps, INDEX=PreProcesedData$date, FUN = sum)
+par(las = "2", mai = c(1.660000, 1.093333, 1.093333, 0.560000))
+barplot(stepsPerDay,width=5 ,main="steps per day", xlab ="day", ylab = "Total steps")
+stepmean <- mean(stepsPerDay,na.rm=T)
+stepmedian <- median(stepsPerDay, na.rm=T)
+c(stepmean,stepmedian)
+```
+The mean of the steps taken per day is `r stepmean` and the median is `r stepmedian`
+
+
+## 3. What is the average daily activity pattern?
+
+
+
+## Imputing missing values
+
+
+
+## Are there differences in activity patterns between weekdays and weekends?
